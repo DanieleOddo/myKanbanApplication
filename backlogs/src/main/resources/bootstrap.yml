@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: backlogs
+
+server:
+  port: 8081
+
+management:
+  security:
+    enabled: false
+
+spring:
+  cloud:
+    consul:
+      discovery:
+        instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+        serviceName: srv-${spring.application.name}
+
+spring:
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+
+spring:
+  cloud:
+    consul:
+      config:
+        enabled: true
+        prefix: configuration
+        defaultContext: apps
+        profileSeparator: '::'
